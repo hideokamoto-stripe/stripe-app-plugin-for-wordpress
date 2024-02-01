@@ -1,0 +1,9 @@
+{
+    "name": "stripe-app-example-wordperss-oauth",
+    "license": "Unlicense",
+    "private": true,
+    "workspaces": [
+        "stripe-app",
+        "wordpress"
+    ]
+}
