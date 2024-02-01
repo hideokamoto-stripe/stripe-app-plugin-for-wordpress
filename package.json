@@ -5,5 +5,8 @@
     "workspaces": [
         "stripe-app",
         "wordpress"
-    ]
+    ],
+    "scripts": {
+        "preinstall": "npx only-allow npm"
+    }
 }

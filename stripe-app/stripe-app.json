@@ -4,6 +4,11 @@
     "name": "Example Wordpress Plugin",
     "icon": "",
     "permissions": [],
+    "stripe_api_access_type": "oauth",
+    "distribution_type": "public",
+    "allowed_redirect_uris": [
+      "https://hidetaka.dev/callback"
+    ],
     "ui_extension": {
         "views": [
             {

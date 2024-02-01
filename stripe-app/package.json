@@ -17,6 +17,9 @@
     ]
   },
   "scripts": {
+    "stripe": "stripe",
+    "start": "stripe apps start",
+    "upload": "stripe apps upload",
     "lint": "eslint --ext ts,tsx src",
     "test": "jest"
   },
