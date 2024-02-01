@@ -34,3 +34,17 @@ $ npm run -w stripe-app lint
 ```bash
 $ npm run -w stripe-app test
 ```
+
+## WordPress
+
+### Setup
+
+```bash
+$ npm install -w wordpress
+```
+
+### Start application
+
+```bash
+$ npm run -w wordpress start
+```
