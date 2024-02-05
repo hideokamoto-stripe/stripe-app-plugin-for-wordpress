@@ -21,6 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 add_action( 'admin_enqueue_scripts', function () {
     wp_enqueue_script( 'stripe_sample_admin_js', plugins_url( '/js/script.js', __FILE__ ) );
+    wp_localize_script( 'stripe_sample_admin_js', 'stripeSampleWPApiSettings', [
+        'root' => esc_url_raw( rest_url() ),
+        'nonce' => wp_create_nonce( 'wp_rest' ),
+    ]);
 } );
 add_action( 'admin_menu', 'stripe_sample_admin_menu' );
 add_action( 'admin_init', 'stripe_sample_admin_init' );
@@ -111,7 +115,8 @@ add_action( 'rest_api_init', function() {
         '/callback',
         [
             'methods' => 'GET',
-            'callback' => 'stripe_sample_callback_handler'
+            'callback' => 'stripe_sample_callback_handler',
+            'permission_callback' => '__return_true',
         ]
     );
     register_rest_route(
@@ -120,9 +125,24 @@ add_action( 'rest_api_init', function() {
         [
             'methods' => 'GET',
             'callback' => 'stripe_sample_list_customers',
+            'permission_callback' => function () {
+                return is_user_logged_in();
+            },
+        ],
+        [
+            'methods' => 'POST',
+            'callback' => 'stripe_sample_create_customers',
+            'permission_callback' => function () {
+                return is_user_logged_in();
+            },
         ]
     );
 } );
+
+function stripe_sample_create_customers( WP_REST_Request $request ) {
+
+    return new WP_REST_Response( ['hello'] );
+}
 
 /**
  * List Stripe Customers

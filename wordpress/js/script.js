@@ -1,19 +1,24 @@
 
-document.addEventListener( 'DOMContentLoaded', () => {
-    const button = document.getElementById( 'fetch-customer-button' );
+const targetAttributes = [{
+    label: 'Customer ID',
+    targetAttributeName: 'id'
+}, {
+    label: 'Name',
+    targetAttributeName: 'name'
+}, {
+    label: 'Email',
+    targetAttributeName: 'email'
+}];
+
+async function loadStripeCustomer() {
     const rowElement = document.getElementById( 'stripe-sample-customer-table' );
-    const targetAttributes = [{
-        label: 'Customer ID',
-        targetAttributeName: 'id'
-    }, {
-        label: 'Name',
-        targetAttributeName: 'name'
-    }, {
-        label: 'Email',
-        targetAttributeName: 'email'
-    }];
-    button.addEventListener( 'click', async () => {
-        const response = await fetch( '/wp-json/stripe-apps/v1/customers' );
+    const { root, nonce } = stripeSampleWPApiSettings;
+    const response = await fetch( root + 'stripe-apps/v1/customers', {
+        method: 'GET',
+        headers: {
+            'X-WP-Nonce': nonce,
+        }
+    } );
         const customers = await response.json()
         if ( response.status > 399 ) {
             const errorResponseElement = document.createElement( 'p' );
@@ -58,5 +63,13 @@ document.addEventListener( 'DOMContentLoaded', () => {
         tableElement.appendChild( tableHeadElement );
         tableElement.appendChild( tableBodyElement );
         rowElement.appendChild( tableElement );
-    } );
+}
+
+async function createStripeCustomer() {
+
+}
+
+document.addEventListener( 'DOMContentLoaded', () => {
+    const button = document.getElementById( 'fetch-customer-button' );
+    button.addEventListener( 'click', loadStripeCustomer );
 })
