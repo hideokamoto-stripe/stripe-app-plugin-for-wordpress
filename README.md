@@ -97,7 +97,7 @@ $ npm run -w stripe-app upload
 
 On the Stripe dashboard, you can get the Installation link on the "External test" tab:
 
-![Stripe App setting](/assets/images/step2.png)
+![screenshot](/assets/images/step2.png)
 
 Please copy the URL on the `Test mode link`.
 
@@ -105,38 +105,63 @@ Please copy the URL on the `Test mode link`.
 
 Move to the WordPress site, please visit the administration page through the menu in the header.
 
-![Stripe App setting](/assets/images/step3.png)
+![screenshot](/assets/images/step3.png)
 
 Click the `Stripe App` tab in the sidebar menu.
 
-![Stripe App setting](/assets/images/step4.png)
+![screenshot](/assets/images/step4.png)
 
 Please put the `Test mode link` starting from 'https://marketplace.stripe.com/oauth' into the `App Install URL` field.
 And put your Stripe Secret API key into the `Secret API key` field.
 
-![Stripe App setting](/assets/images/step5.png)
+![screenshot](/assets/images/step5.png)
 
 Press the `Save settings` button to save these data.
 
 ### Step6: [/wordpress] Save the data and start to OAuth flow
+
+After succeeded to save the data, you can install Stripe App button on the plugin page.
+
+![screenshot](/assets/images/step6.png)
+
+
+Click this link, and accept the external beta testing.
+
+![screenshot](/assets/images/step7.png)
+
+You can choose or create a new Stripe account to connect to the WordPress site. You need to choose a Stripe account other thant the one used to upload the Stripe app.
+
+![screenshot](/assets/images/step8.png)
+
+After authentication succeeded, you're going to redirect to the plugin setting page.
+
 ### Step7: Create a new Stripe customer
-### Step8: [/wordpress] Fetch customer data
 
-### Setup
+You can create a new Stripe customer from this page, please click the `Create a new customer` button.
 
-```bash
-$ npm install -w stripe-app
-```
+![screenshot](/assets/images/step9.png)
 
-### Start application
+
+Then, this WordPress plugin will create a new customer and return the customer data.
+
+![screenshot](/assets/images/step10.png)
+
+
+## Useful command
+
+### Start Stripe App
 
 ```bash
 $ npm run -w stripe-app start
 ```
 
-### Useful command
+### Start WordPress 
 
-#### Stripe CLI
+```bash
+$ npm run -w wordpress start
+```
+
+### Stripe CLI
 
 ```bash
 $ npm run -w stripe-app stripe <SUB_COMMAND>
@@ -145,27 +170,8 @@ $ npm run -w stripe-app stripe <SUB_COMMAND>
 $ npm run -w stripe-app stripe apps grant permission "customer_read" "List the customer names"
 ```
 
-#### Lint
+### wp-now
 
 ```bash
-$ npm run -w stripe-app lint
-```
-
-#### Unit test
-```bash
-$ npm run -w stripe-app test
-```
-
-## WordPress
-
-### Setup
-
-```bash
-$ npm install -w wordpress
-```
-
-### Start application
-
-```bash
-$ npm run -w wordpress start
+$ npm run -w wordpress wp-now <SUB_COMMAND>
 ```

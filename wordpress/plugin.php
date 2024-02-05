@@ -311,7 +311,11 @@ function stripe_sample_callback_handler( WP_REST_Request $request ) {
         return $error_response;
     }
 
-    $response = new WP_REST_Response( $auth_result );
-    $response->set_status( 200 );
-    return $response;
+    return new WP_REST_Response(
+        null,
+        302,
+        array(
+            'Location' => admin_url('admin.php?page=stripe-app')
+        )
+    );
 }
