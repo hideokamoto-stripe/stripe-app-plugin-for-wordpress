@@ -40,7 +40,7 @@ function stripe_sample_admin_init() {
 
     add_settings_field(
         'app_redirect_url',
-        'App Redirect URL',
+        'App Install URL',
         'app_redirect_url_callback',
         'stripe_samples_app',
         'stripe_samples_app_section'
