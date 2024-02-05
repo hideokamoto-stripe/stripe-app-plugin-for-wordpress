@@ -1,12 +1,19 @@
-## Stripe app
+# Stripe apps for plugin example (WordPress)
 
+You can connect to Stripe account from WordPress through by Stripe Apps for plugin.
+This application provides the following features:
+
+- Stripe Apps for plugins
+- Provide authentication callback using WP API
+- Grant and refresh authentication token
+- Create and list Stripe customer by using access_token.
 
 ## Requirement
 
-- 2 Stripe account
- - 1: For uploading (and publish) Stripe App
- - 2: Install the Stripe app for testing
--  ** node version v20.0.0 **
+- 2 Stripe account  
+1: For uploading (and publish) Stripe App  
+2: Install the Stripe app for testing
+-  **node version v20.0.0**
 
 ## Getting started
 
