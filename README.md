@@ -46,7 +46,7 @@ Server running at http://localhost:8881
 
 Visit the WordPress site from the URL from the CLI result.
 
-![WordPress site]('/assets/images/step1.png')
+![WordPress site](/assets/images/step1.png)
 
 
 ### Step2: [/wordpress] Set HTTP proxy by `ngrok`
@@ -97,7 +97,7 @@ $ npm run -w stripe-app upload
 
 On the Stripe dashboard, you can get the Installation link on the "External test" tab:
 
-![Stripe App setting]('/assets/images/step2.png')
+![Stripe App setting](/assets/images/step2.png)
 
 Please copy the URL on the `Test mode link`.
 
@@ -105,16 +105,16 @@ Please copy the URL on the `Test mode link`.
 
 Move to the WordPress site, please visit the administration page through the menu in the header.
 
-![Stripe App setting]('/assets/images/step2.png')
+![Stripe App setting](/assets/images/step3.png)
 
 Click the `Stripe App` tab in the sidebar menu.
 
-![Stripe App setting]('/assets/images/step3.png')
+![Stripe App setting](/assets/images/step4.png)
 
 Please put the `Test mode link` starting from 'https://marketplace.stripe.com/oauth' into the `App Install URL` field.
 And put your Stripe Secret API key into the `Secret API key` field.
 
-![Stripe App setting]('/assets/images/step4.png')
+![Stripe App setting](/assets/images/step5.png)
 
 Press the `Save settings` button to save these data.
 
