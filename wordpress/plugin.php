@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Add Setting UI
  */
+add_action( 'admin_enqueue_scripts', function () {
+    wp_enqueue_script( 'stripe_sample_admin_js', plugins_url( '/js/script.js', __FILE__ ) );
+} );
 add_action( 'admin_menu', 'stripe_sample_admin_menu' );
 add_action( 'admin_init', 'stripe_sample_admin_init' );
 function stripe_sample_admin_init() {
@@ -74,6 +77,8 @@ function stripe_sample_admin_menu() {
 }
 
 function stripe_sample_settings_page() {
+    $options = get_option( 'stripe_sample_oauth' );
+    $has_authenticated = isset( $options) && ! empty( $options );
 ?>
     <div class='wrap'>
         <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
@@ -85,7 +90,16 @@ function stripe_sample_settings_page() {
             ?>
         </form>
     </div>
+<?php
+    if ( $has_authenticated  ) {
+?>
+    <div class='wrap'>
+        <h2>Customers</h2>
+        <button id='fetch-customer-button'>Fetch customers</button>
+        <div id='stripe-sample-customer-table'></div>
+    </div>
 <?
+    }
 }
 
 /**
