@@ -1,25 +1,30 @@
 {
-    "id": "com.example.example-wordpress-plugin",
-    "version": "0.0.1",
-    "name": "Example Wordpress Plugin",
-    "icon": "",
-    "permissions": [],
-    "stripe_api_access_type": "oauth",
-    "distribution_type": "public",
-    "allowed_redirect_uris": [
-      "https://hidetaka.dev/callback"
-    ],
-    "ui_extension": {
-        "views": [
-            {
-                "viewport": "stripe.dashboard.customer.detail",
-                "component": "App"
-            }
-        ],
-        "content_security_policy": {
-            "connect-src": null,
-            "image-src": null,
-            "purpose": ""
-        }
+  "id": "com.example.wordpress-stripe-plugin-oauth",
+  "version": "0.0.4",
+  "name": "Example Wordpress Plugin",
+  "icon": "",
+  "permissions": [
+    {
+      "permission": "customer_read",
+      "purpose": "List the customer names"
     }
+  ],
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.detail",
+        "component": "App"
+      }
+    ],
+    "content_security_policy": {
+      "connect-src": null,
+      "image-src": null,
+      "purpose": ""
+    }
+  },
+  "allowed_redirect_uris": [
+    "https://REPLACE_YOUR_WORDPRESS_URL/wp-json/stripe-apps/v1/callback"
+  ],
+  "stripe_api_access_type": "oauth",
+  "distribution_type": "public"
 }

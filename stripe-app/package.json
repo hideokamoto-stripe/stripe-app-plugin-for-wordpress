@@ -1,9 +1,9 @@
 {
-  "name": "com.example.example-wordpress-plugin",
+  "name": "com.example.wordpress-stripe-plugin-oauth",
   "version": "0.0.1",
   "description": "Test",
   "private": true,
-  "license": "~~proprietary~~",
+  "license": "MIT",
   "dependencies": {
     "@stripe/ui-extension-sdk": "^8.8.1",
     "stripe": "^14.14.0"

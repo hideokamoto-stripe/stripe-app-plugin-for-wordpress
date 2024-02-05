@@ -1,7 +1,8 @@
 {
-  "name": "wordpress",
+  "name": "wordpress-stripe-plugin-oauth",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "wp-now": "wp-now",
@@ -10,7 +11,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@wp-now/wp-now": "^0.1.64"
   }
