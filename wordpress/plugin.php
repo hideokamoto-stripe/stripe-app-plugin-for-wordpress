@@ -99,8 +99,11 @@ function stripe_sample_settings_page() {
 ?>
     <div class='wrap'>
         <h2>Customers</h2>
-        <button id='fetch-customer-button'>Fetch customers</button>
-        <div id='stripe-sample-customer-table'></div>
+        <div class='wrap'>
+            <button id='create-new-customer'>Create a new customer</button>
+            <button id='fetch-customer-button'>Fetch customers</button>
+        </div>
+        <div class='wrap' id='stripe-sample-customer-table'></div>
     </div>
 <?
     }
@@ -123,26 +126,66 @@ add_action( 'rest_api_init', function() {
         'stripe-apps/v1',
         '/customers',
         [
-            'methods' => 'GET',
-            'callback' => 'stripe_sample_list_customers',
-            'permission_callback' => function () {
-                return is_user_logged_in();
-            },
-        ],
-        [
-            'methods' => 'POST',
-            'callback' => 'stripe_sample_create_customers',
-            'permission_callback' => function () {
-                return is_user_logged_in();
-            },
+            [
+                'methods' => 'GET',
+                'callback' => 'stripe_sample_list_customers',
+                'permission_callback' => function () {
+                    return is_user_logged_in();
+                },
+            ],
+            [
+                'methods' => 'PUT',
+                'callback' => 'stripe_sample_create_customers',
+                'permission_callback' => function () {
+                    return is_user_logged_in();
+                },
+            ]
         ]
     );
 } );
 
 function stripe_sample_create_customers( WP_REST_Request $request ) {
+    $options = get_option( 'stripe_sample_oauth' );
+    if ( ! isset( $options) || empty( $options ) ) {
+        $error_response = new WP_REST_Response([
+            'error' => 'Permission denined.'
+        ] );
+        $error_response->set_status( 400 );
+        return $error_response;
+    }
+    $settings = json_decode( $options, true );
+    $refresh_token = $settings[ 'refresh_token' ];
+    if ( ! isset( $refresh_token) || empty( $refresh_token ) ) {
+        $error_response = new WP_REST_Response([
+            'error' => 'Missing token.'
+        ] );
+        $error_response->set_status( 400 );
+        return $error_response;
+    }
+    $refreshed_data = stripe_sample_update_oauth_token( 'refresh_token', $refresh_token );
 
-    return new WP_REST_Response( ['hello'] );
+    $user = wp_get_current_user();
+    $user_email = $user->user_email;
+    $username = $user->display_name;
+
+    $access_token = $refreshed_data[ 'access_token' ];
+    $base_url = 'https://api.stripe.com/v1/'; 
+    $response = wp_remote_get( $base_url . 'customers', [
+        'method' => 'POST',
+        'headers' => [
+            'Authorization' => 'BASIC ' . base64_encode( $access_token ),
+        ],
+        'body' => [
+            'name' => $username,
+            'email' => $user_email,
+        ]
+    ] );
+    $response_body = wp_remote_retrieve_body( $response );
+
+    return new WP_REST_Response( json_decode( $response_body, true ) );
 }
+
+
 
 /**
  * List Stripe Customers
@@ -178,7 +221,6 @@ function stripe_sample_list_customers( WP_REST_Request $request ) {
     }
     
     $access_token = $refreshed_data[ 'access_token' ];
-    $livemode = $refreshed_data[ 'livemode' ];
     $base_url = 'https://api.stripe.com/v1/'; 
     $response = wp_remote_get( $base_url . 'customers', [
         'headers' => [
