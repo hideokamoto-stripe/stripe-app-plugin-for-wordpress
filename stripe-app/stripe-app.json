@@ -1,12 +1,12 @@
 {
   "id": "com.example.wordpress-stripe-plugin-oauth",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "name": "Example Wordpress Plugin",
   "icon": "",
   "permissions": [
     {
-      "permission": "customer_read",
-      "purpose": "List the customer names"
+      "permission": "customer_write",
+      "purpose": "Create and list customer informations"
     }
   ],
   "ui_extension": {

@@ -138,6 +138,13 @@ function stripe_sample_list_customers( WP_REST_Request $request ) {
     }
     $settings = json_decode( $options, true );
     $refresh_token = $settings[ 'refresh_token' ];
+    if ( ! isset( $refresh_token) || empty( $refresh_token ) ) {
+        $error_response = new WP_REST_Response([
+            'error' => 'Missing token.'
+        ] );
+        $error_response->set_status( 400 );
+        return $error_response;
+    }
 
     $refreshed_data = stripe_sample_update_oauth_token( 'refresh_token', $refresh_token );
     if ( is_wp_error( $refreshed_data ) ) {
@@ -210,12 +217,6 @@ function stripe_sample_update_oauth_token( $grant_type, $code_or_token ) {
  * OAuth callback handler
  */
 function stripe_sample_callback_handler( WP_REST_Request $request ) {
-    return new WP_REST_Response( [
-        'api_key' => get_option( 'secret_api_key' ),
-        'stripe_sample_oauth_code' => get_option( 'stripe_sample_oauth_code' ),
-        'stripe_sample_oauth' => get_option( 'stripe_sample_oauth' )
-    ] );
-
 
     $params = $request->get_query_params();
     if ( ! isset( $params[ 'code' ] ) || empty( $params[ 'code' ] ) ) {
