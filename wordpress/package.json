@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "wp-now": "wp-now",
-    "start": "wp-now start",
+    "start": "wp-now start --blueprint=./blueprints.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

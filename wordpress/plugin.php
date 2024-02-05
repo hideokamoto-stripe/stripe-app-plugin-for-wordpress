@@ -82,7 +82,9 @@ function stripe_sample_admin_menu() {
 
 function stripe_sample_settings_page() {
     $options = get_option( 'stripe_sample_oauth' );
-    $has_authenticated = isset( $options) && ! empty( $options );
+    $install_url = get_option( 'app_redirect_url' );
+    $secret_api_key = get_option( 'secret_api_key' );
+    $has_authenticated = isset( $options ) && ! empty( $options );
 ?>
     <div class='wrap'>
         <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
@@ -106,6 +108,15 @@ function stripe_sample_settings_page() {
         <div class='wrap' id='stripe-sample-customer-table'></div>
     </div>
 <?
+    } else if ( $install_url && $secret_api_key ) {
+?>
+<div class='wrap'>
+    <h2>Connect with your Stripe account</h2>
+    <p>
+        <a href="<?php echo esc_url( $install_url ); ?>" target="_blank" class='button button-primary'>Instal Stripe app</a>
+    </p>
+</div>
+<?php
     }
 }
 

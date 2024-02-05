@@ -6,7 +6,7 @@
 - 2 Stripe account
  - 1: For uploading (and publish) Stripe App
  - 2: Install the Stripe app for testing
--  Node.js (LTS)
+-  ** node version v20.0.0 **
 
 ## Getting started
 
@@ -46,7 +46,9 @@ Server running at http://localhost:8881
 
 Visit the WordPress site from the URL from the CLI result.
 
-![assets/images/step1.png]('WordPress site')
+![WordPress site]('/assets/images/step1.png')
+
+
 
 
 ### Step2: [/wordpress] Set HTTP proxy by `ngrok`
